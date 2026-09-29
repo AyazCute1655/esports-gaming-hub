@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="PRO GAMING HUB — VALORANT ve Rocket League için profesyonel esports bilgi merkezi, taktik rehberleri, haritalar, silahlar, mekanikler ve rank rehberleri."
+      content="PRO GAMING HUB - VALORANT ve Rocket League için profesyonel esports bilgi merkezi, haritalar, silahlar, mekanikler, taktikler ve rank rehberleri."
     />
     <title>PRO GAMING HUB</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -18,7 +18,7 @@
   </head>
   <body>
     <header class="site-header">
-      <div class="container header-inner">
+      <div class="container header-row">
         <div class="brand-wrap">
           <div class="brand-mark">PGH</div>
           <div>
@@ -29,10 +29,10 @@
 
         <nav class="main-nav">
           <a href="#home" class="nav-link active">Anasayfa</a>
-          <a href="#valorant" class="nav-link">VALORANT</a>
-          <a href="#rocket" class="nav-link">ROCKET LEAGUE</a>
-          <a href="#tactics" class="nav-link">Taktikler</a>
-          <a href="#guides" class="nav-link">Rehberler</a>
+          <a href="#valorant">VALORANT</a>
+          <a href="#rocket">ROCKET LEAGUE</a>
+          <a href="#tactics">Taktikler</a>
+          <a href="#guides">Rehberler</a>
         </nav>
 
         <button class="mobile-toggle" aria-label="Mobil menü">
@@ -47,20 +47,16 @@
       <section class="hero-section">
         <div class="container hero-grid">
           <div class="hero-copy">
-            <span class="section-tag">ESPORTS KNOWLEDGE HUB</span>
+            <span class="eyebrow">ESPORTS KNOWLEDGE HUB</span>
             <h1>PRO GAMING HUB</h1>
             <p>
-              VALORANT ve Rocket League için profesyonel seviyede hazırlanmış
-              taktik rehberleri, oyun veritabanı, harita ve mekanik analizi.
+              Valorant ve Rocket League için profesyonel, detaylı ve modern bir bilgi merkezi.
+              Taktikler, haritalar, silahlar, mekanikler, arenalar ve rank rehberleri tek platformda.
             </p>
 
             <div class="hero-actions">
-              <button class="btn btn-primary" data-game-select="valorant">
-                VALORANT Keşfet
-              </button>
-              <button class="btn btn-secondary" data-game-select="rocket">
-                Rocket League Keşfet
-              </button>
+              <button class="btn btn-primary" data-game="valorant">VALORANT Keşfet</button>
+              <button class="btn btn-secondary" data-game="rocket">Rocket League Keşfet</button>
             </div>
 
             <div class="quick-tags">
@@ -73,17 +69,17 @@
           </div>
 
           <div class="game-picker">
-            <article class="game-card valorant active" data-game-select="valorant">
+            <article class="game-card active" data-game="valorant">
               <div class="card-topline">VALORANT</div>
-              <h3>Ajan, harita ve taktiki merkez</h3>
-              <p>Kompozisyon, site kontrolü, retake ve default planlar.</p>
+              <h3>Ajan, harita ve taktik merkezi</h3>
+              <p>Site kontrolü, retake, execute, default ve profesyonel kompozisyonlara dair tüm içerik.</p>
               <button class="mini-btn">Keşfet</button>
             </article>
 
-            <article class="game-card rocket" data-game-select="rocket">
-              <div class="card-topline">ROCKET LEAGUE</div>
-              <h3>Mekanik, rota ve boost yönetimi</h3>
-              <p>1v1, 3v3, rotation, passing ve rank rehberleri.</p>
+            <article class="game-card" data-game="rocket">
+              <div class="card-topline rl">ROCKET LEAGUE</div>
+              <h3>Mekanik, boost ve rota sistemi</h3>
+              <p>1v1, 2v2, 3v3, mekanik rehberleri, boost yönetimi ve rank artışı.</p>
               <button class="mini-btn">Keşfet</button>
             </article>
           </div>
@@ -93,15 +89,11 @@
       <section class="search-panel-wrap">
         <div class="container search-panel">
           <div class="search-shell">
-            <input
-              id="globalSearch"
-              type="text"
-              placeholder="Jett, Vandal, Bind, Speed Flip, 2v2, Rotation..."
-            />
+            <input id="globalSearch" type="text" placeholder="Jett, Vandal, Bind, Speed Flip, 2v2, Rotation..." />
             <button id="searchBtn" class="btn btn-primary">Ara</button>
           </div>
 
-          <div class="search-tags">
+          <div class="tag-list">
             <button class="tag-chip active" data-tag="all">Tümü</button>
             <button class="tag-chip" data-tag="valorant">VALORANT</button>
             <button class="tag-chip" data-tag="rocket">ROCKET LEAGUE</button>
@@ -115,13 +107,12 @@
         <div class="container">
           <div class="section-header">
             <div>
-              <span class="section-tag">İÇERİK AKIŞI</span>
+              <span class="eyebrow small">İÇERİK AKIŞI</span>
               <h2>Son Eklenen İçerikler</h2>
             </div>
             <a href="#database" class="text-link">Tümünü Gör</a>
           </div>
-
-          <div id="recentContent" class="content-grid"></div>
+          <div id="recentContent" class="card-grid"></div>
         </div>
       </section>
 
@@ -129,13 +120,12 @@
         <div class="container">
           <div class="section-header">
             <div>
-              <span class="section-tag">ANALİZ</span>
+              <span class="eyebrow small">ANALİZ</span>
               <h2>Popüler Taktikler</h2>
             </div>
             <a href="#tactics" class="text-link">Detay</a>
           </div>
-
-          <div id="popularTactics" class="content-grid"></div>
+          <div id="popularTactics" class="card-grid"></div>
         </div>
       </section>
 
@@ -143,13 +133,12 @@
         <div class="container">
           <div class="section-header">
             <div>
-              <span class="section-tag">KATEGORİ</span>
+              <span class="eyebrow small">KATEGORİ</span>
               <h2>Öne Çıkan Rehberler</h2>
             </div>
             <a href="#guides" class="text-link">İçerikleri Aç</a>
           </div>
-
-          <div id="featuredGuides" class="content-grid"></div>
+          <div id="featuredGuides" class="card-grid"></div>
         </div>
       </section>
 
@@ -157,24 +146,17 @@
         <div class="container">
           <div class="database-topbar">
             <div>
-              <span class="section-tag">VERİTABANI</span>
+              <span class="eyebrow small">VERİTABANI</span>
               <h2 id="databaseTitle">VALORANT Veritabanı</h2>
             </div>
-            <div class="database-tabs">
+            <div class="game-tabs">
               <button class="game-tab active" data-game="valorant">VALORANT</button>
               <button class="game-tab" data-game="rocket">ROCKET LEAGUE</button>
             </div>
           </div>
 
           <div class="filter-toolbar">
-            <select id="categorySelect">
-              <option value="Ajanlar">Ajanlar</option>
-              <option value="Haritalar">Haritalar</option>
-              <option value="Silahlar">Silahlar</option>
-              <option value="Modlar">Modlar</option>
-              <option value="Taktikler">Taktikler</option>
-            </select>
-
+            <select id="categorySelect"></select>
             <select id="difficultySelect">
               <option value="all">Tüm zorluklar</option>
               <option value="Başlangıç">Başlangıç</option>
@@ -182,7 +164,6 @@
               <option value="İleri">İleri</option>
               <option value="Profesyonel">Profesyonel</option>
             </select>
-
             <input id="miniSearch" type="text" placeholder="Kategori içinde ara..." />
           </div>
 
@@ -194,7 +175,7 @@
         <div class="container">
           <div class="section-header">
             <div>
-              <span class="section-tag">PROFESYONEL GÖRÜNÜM</span>
+              <span class="eyebrow small">PROFESYONEL GÖRÜNÜM</span>
               <h2>İnteraktif Taktik Sistemi</h2>
             </div>
           </div>
@@ -279,12 +260,11 @@
         <div class="container">
           <div class="section-header">
             <div>
-              <span class="section-tag">REHBERLER</span>
+              <span class="eyebrow small">REHBERLER</span>
               <h2>Yeni İçerikler ve Rank Rehberleri</h2>
             </div>
           </div>
-
-          <div id="guideGrid" class="content-grid"></div>
+          <div id="guideGrid" class="card-grid"></div>
         </div>
       </section>
     </main>

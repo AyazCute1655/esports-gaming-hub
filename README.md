@@ -8,32 +8,26 @@ Modern, profesyonel ve tamamen Türkçe bir esports bilgi platformu. Bu proje, V
 - VALORANT ve Rocket League ayrı oyun kimliği
 - Profesyonel hero alanı ve oyun kartları
 - Son eklenen içerikler, popüler taktikler ve rehberler
-- Arama sistemi ve etiket filtreleme
-- Veritabanı görünümü kategorilere göre
+- Gelişmiş arama ve filtreleme
+- Veritabanı görünümü, oyun kategorileri ve detay kartları
 - Responsive tasarım
-- Taktik gösterim panelleri
-- Türkçe içerik ve metinler
+- İnteraktif taktik paneli
+- Türkçe içerik ve veriler
 
 ## Çalıştırma
 
-Projeyi yerelde çalıştırmak için aşağıdaki komutu kullanabilirsiniz:
+Projeyi yerelde çalıştırmak için:
 
 ```bash
 python -m http.server 8000
 ```
 
-Ardından tarayıcıda aşağıdaki adrese gidin:
+Ardından tarayıcıda:
 
 ```text
 http://localhost:8000
 ```
 
-## Dosya yapısı
-
-- `index.html` – ana arayüz
-- `styles.css` – modern görünüm ve responsive tasarım
-- `script.js` – veri yapıları, arama, filtreleme ve dinamik içerik render
-
 ## Not
 
-Bu proje, kullanıcı isteğine göre sıfırdan oluşturulmuş, genişletilebilir bir esports bilgi platformu örneğidir.
+Projede tüm ana VALORANT ve Rocket League veri kümeleri yer alır; içerik sisteminin kolayca genişletilebilmesi için veriler ayrı yapılandırılmıştır.
