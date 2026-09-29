@@ -13,6 +13,7 @@ Modern, profesyonel ve tamamen Türkçe bir esports bilgi platformu. Bu proje, V
 - Responsive tasarım
 - İnteraktif taktik paneli
 - Türkçe içerik ve veriler
+- SSS bölümü, istatistikler ve özellik kartları
 
 ## Çalıştırma
 

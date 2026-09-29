@@ -10,7 +10,7 @@ const data = {
       { id: 'VAL-AGENT-007', name: 'Deadlock', role: 'Sentinel', difficulty: 'İleri', detail: 'Yüksek kontrol, kapama ve engelleme kale taşı.', tags: ['Engel', 'Kontrol', 'Açık alan'] },
       { id: 'VAL-AGENT-008', name: 'Fade', role: 'Initiator', difficulty: 'İleri', detail: 'Takip, flash ve şekil bozucu girişciliğin temsili.', tags: ['Tespit', 'Flash', 'Giriş'] },
       { id: 'VAL-AGENT-009', name: 'Gekko', role: 'Initiator', difficulty: 'Başlangıç', detail: 'Köpek arkadaşlarıyla agresif iş birlikçi giriş.', tags: ['İş birlik', 'Giriş', 'Harita'] },
-      { id: 'VAL-AGENT-010', name: 'Harbor', role: 'Controller', difficulty: 'Orta', detail: 'Su kontrolü ve alan kısıtlamasıyla site baskısı oluşturan ajan.', tags: ['Su', 'Kontrol', 'Duraklatma'] },
+      { id: 'VAL-AGENT-010', name: 'Harbor', role: 'Controller', difficulty: 'Orta', detail: 'Su kontrolü ve alan kısıtlamasıyla site baskısı kuran ajan.', tags: ['Su', 'Kontrol', 'Duraklatma'] },
       { id: 'VAL-AGENT-011', name: 'Iso', role: 'Duelist', difficulty: 'İleri', detail: 'Bireysel performans ve 1v1 üstünlüğünü ön plana çıkaran ajan.', tags: ['Duel', '1v1', 'Saldırı'] },
       { id: 'VAL-AGENT-012', name: 'Jett', role: 'Duelist', difficulty: 'İleri', detail: 'Hız, hareket ve çeviklik odaklı agresif temizlik ajanı.', tags: ['Çeviklik', 'Entry', 'Açık alan'] },
       { id: 'VAL-AGENT-013', name: 'KAY/O', role: 'Initiator', difficulty: 'Orta', detail: 'Sinyal ve kontrol odaklı giriş yetenekleriyle bölge baskısı kurar.', tags: ['Sinyal', 'Giriş', 'Kontrol'] },
@@ -216,24 +216,24 @@ function applySearch(items, query) {
 function renderHomeCards() {
   const recent = applySearch(homeCollections.recent, state.searchTerm).filter((item) => {
     if (state.tag === 'all') return true;
-    if (state.tag === 'valorant') return item.game.toLowerCase() === 'valorant';
-    if (state.tag === 'rocket') return item.game.toLowerCase() === 'rocket league' || item.game.toLowerCase() === 'rocket';
-    if (state.tag === 'tactic') return item.type.toLowerCase().includes('taktik');
-    if (state.tag === 'guide') return item.type.toLowerCase().includes('rehber') || item.type === 'Rank';
+    if (state.tag === 'valorant') return normalizeText(item.game) === 'valorant';
+    if (state.tag === 'rocket') return normalizeText(item.game).includes('rocket');
+    if (state.tag === 'tactic') return normalizeText(item.type).includes('taktik');
+    if (state.tag === 'guide') return normalizeText(item.type).includes('rehber') || normalizeText(item.type).includes('rank');
     return true;
   });
 
   document.getElementById('recentContent').innerHTML = recent.slice(0, 6).map((item) => `
     <article class="content-card">
       <div class="card-header">
-        <span class="card-badge ${item.game === 'valorant' ? 'val' : 'rl'}">${item.badge}</span>
+        <span class="card-badge ${normalizeText(item.game).includes('rocket') ? 'rl' : 'val'}">${item.badge}</span>
         <span class="card-meta">${item.meta}</span>
       </div>
       <h3>${item.title}</h3>
       <p>${item.detail}</p>
       <div class="card-footer">
         <span class="card-pill">${item.type}</span>
-        <span>${item.game === 'valorant' ? 'VALORANT' : 'ROCKET LEAGUE'}</span>
+        <span>${normalizeText(item.game).includes('rocket') ? 'ROCKET LEAGUE' : 'VALORANT'}</span>
       </div>
     </article>
   `).join('');
@@ -270,12 +270,15 @@ function renderHomeCards() {
     </article>
   `).join('');
 
-  const guideGridItems = [...homeCollections.guides, ...data.rocket.ranks.map((item) => ({
-    title: `${item.name} Rank Rehberi`,
-    game: 'ROCKET LEAGUE',
-    type: 'Rank Guide',
-    detail: item.detail
-  }))];
+  const guideGridItems = [
+    ...homeCollections.guides,
+    ...data.rocket.ranks.map((item) => ({
+      title: `${item.name} Rank Rehberi`,
+      game: 'ROCKET LEAGUE',
+      type: 'Rank Guide',
+      detail: item.detail
+    }))
+  ];
 
   document.getElementById('guideGrid').innerHTML = applySearch(guideGridItems, state.searchTerm).slice(0, 6).map((item) => `
     <article class="content-card">
