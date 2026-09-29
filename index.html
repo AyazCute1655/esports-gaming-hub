@@ -1,158 +1,134 @@
 <!DOCTYPE html>
 <html lang="tr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Game Guide Hub</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <header class="topbar">
-      <div class="container nav">
-        <div class="brand">
-          <div class="brand-mark">G</div>
-          <span>Game Hub</span>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ESPORTS GAMING HUB</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="landing" class="landing-page active">
+    <div class="landing-shell">
+      <div class="landing-header">
+        <span class="eyebrow">HANGİ OYUNA GİRECEKSİN?</span>
+        <h1>ESPORTS GAMING HUB</h1>
+        <p>VALORANT ve Rocket League için ayrı, profesyonel ve özel rehber arayüzleri.</p>
+      </div>
+
+      <div class="game-grid">
+        <button class="game-card valorant-card" data-game="valorant">
+          <div class="game-badge">R</div>
+          <div class="game-icon">⚔️</div>
+          <h2>VALORANT</h2>
+          <p>Rekabetçi FPS rehberleri</p>
+          <ul>
+            <li>22+ Ajan</li>
+            <li>7 Harita</li>
+            <li>Profesyonel Taktikler</li>
+          </ul>
+          <span class="enter-btn">Git</span>
+        </button>
+
+        <button class="game-card rocket-card" data-game="rocket">
+          <div class="game-badge">RL</div>
+          <div class="game-icon">🚗</div>
+          <h2>ROCKET LEAGUE</h2>
+          <p>Sportif, hızlı, mekanik rehber</p>
+          <ul>
+            <li>Arabalar</li>
+            <li>Aerial sistem</li>
+            <li>Rotasyon taktikleri</li>
+          </ul>
+          <span class="enter-btn">Git</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="valorant-app" class="game-app hidden">
+    <header class="game-header valorant-header">
+      <div class="header-inner">
+        <div class="brand-block">
+          <span class="brand-mark">V</span>
+          <span>VALORANT</span>
         </div>
 
-        <nav class="nav-links">
-          <a href="#home">Ana Sayfa</a>
-          <a href="#valorant">VALORANT</a>
-          <a href="#rocket">Rocket League</a>
-          <a href="#tactics">Taktikler</a>
-          <a href="#faq">SSS</a>
+        <nav class="game-nav">
+          <a href="#" data-section="home">Ana Sayfa</a>
+          <a href="#" data-section="agents">Ajanlar</a>
+          <a href="#" data-section="maps">Haritalar</a>
+          <a href="#" data-section="weapons">Silahlar</a>
+          <a href="#" data-section="tactics">Taktikler</a>
+          <a href="#" data-section="crosshair">Crosshair</a>
         </nav>
 
-        <button class="btn primary">İçerik Keşfet</button>
+        <button class="back-btn" data-back="landing">Geri</button>
       </div>
     </header>
 
-    <main id="home">
-      <section class="hero">
-        <div class="container hero-grid">
-          <div class="hero-main">
-            <span class="eyebrow">Yeni rehberler</span>
-            <h1>Oyun içi bilgi, taktik ve rehber merkezi</h1>
-            <div class="hero-sub">
-              VALORANT ve Rocket League için güncel taktikler, detaylı içerikler,
-              strateji rehberleri ve soru-cevap alanı tek ekranda.
-            </div>
-            <div class="hero-buttons">
-              <button class="btn primary">VALORANT Rehberleri</button>
-              <button class="btn secondary">Rocket League Rehberleri</button>
-            </div>
-          </div>
-
-          <div class="hero-side">
-            <div class="eyebrow">Öne çıkan</div>
-            <div class="mini-list">
-              <div class="mini-card">
-                <strong>VALORANT: Site Atak Taktikleri</strong>
-                <small>Yeni başlayanlar için adım adım plan</small>
-              </div>
-              <div class="mini-card">
-                <strong>Rocket League: Boost Yönetimi</strong>
-                <small>Rotasyon ve timing için kritik noktalar</small>
-              </div>
-              <div class="mini-card">
-                <strong>FAQ: Hangi mod daha uygun?</strong>
-                <small>Seviye ve oyun stili için öneriler</small>
-              </div>
-            </div>
-          </div>
+    <div class="game-layout">
+      <aside class="game-sidebar valorant-sidebar">
+        <div class="sidebar-box">
+          <h3>MENÜ</h3>
+          <ul>
+            <li><a href="#" data-section="home">🏠 Ana Sayfa</a></li>
+            <li><a href="#" data-section="agents">🧠 Ajanlar</a></li>
+            <li><a href="#" data-section="maps">🗺️ Haritalar</a></li>
+            <li><a href="#" data-section="weapons">🔫 Silahlar</a></li>
+            <li><a href="#" data-section="modes">🎮 Oyun Modları</a></li>
+            <li><a href="#" data-section="tactics">⚡ Taktikler</a></li>
+            <li><a href="#" data-section="crosshair">✦ Crosshair</a></li>
+            <li><a href="#" data-section="updates">📰 Güncellemeler</a></li>
+          </ul>
         </div>
-      </section>
+      </aside>
 
-      <section id="valorant" class="container">
-        <div class="section-head">
-          <div>
-            <h2>VALORANT</h2>
-          </div>
-          <p>Rehber, ajan, harita ve taktik içerikleri</p>
+      <main id="valorant-main" class="game-main"></main>
+    </div>
+  </div>
+
+  <div id="rocket-app" class="game-app hidden">
+    <header class="game-header rocket-header">
+      <div class="header-inner">
+        <div class="brand-block">
+          <span class="brand-mark">RL</span>
+          <span>ROCKET LEAGUE</span>
         </div>
 
-        <div class="theme-panel valorant">
-          <div class="tabbar">
-            <button class="tab-btn active">Ajanlar</button>
-            <button class="tab-btn">Haritalar</button>
-            <button class="tab-btn">Silahlar</button>
-            <button class="tab-btn">Taktikler</button>
-          </div>
+        <nav class="game-nav">
+          <a href="#" data-section="home">Ana Sayfa</a>
+          <a href="#" data-section="cars">Arabalar</a>
+          <a href="#" data-section="arenas">Arenalar</a>
+          <a href="#" data-section="mechanics">Mekanikler</a>
+          <a href="#" data-section="tactics">Taktikler</a>
+          <a href="#" data-section="training">Antrenman</a>
+        </nav>
 
-          <div id="valorant-content" class="panel-grid"></div>
+        <button class="back-btn" data-back="landing">Geri</button>
+      </div>
+    </header>
+
+    <div class="game-layout">
+      <aside class="game-sidebar rocket-sidebar">
+        <div class="sidebar-box">
+          <h3>MENÜ</h3>
+          <ul>
+            <li><a href="#" data-section="home">🏠 Ana Sayfa</a></li>
+            <li><a href="#" data-section="cars">🚗 Arabalar</a></li>
+            <li><a href="#" data-section="arenas">🏟️ Arenalar</a></li>
+            <li><a href="#" data-section="modes">🎮 Modlar</a></li>
+            <li><a href="#" data-section="mechanics">⚙️ Mekanikler</a></li>
+            <li><a href="#" data-section="aerial">✈️ Aerial</a></li>
+            <li><a href="#" data-section="tactics">⚡ Taktikler</a></li>
+            <li><a href="#" data-section="training">🏋️ Antrenman</a></li>
+          </ul>
         </div>
-      </section>
+      </aside>
 
-      <section id="rocket" class="container">
-        <div class="section-head">
-          <div>
-            <h2>Rocket League</h2>
-          </div>
-          <p>Motor kontrolü, taktik ve oynanış rehberleri</p>
-        </div>
+      <main id="rocket-main" class="game-main"></main>
+    </div>
+  </div>
 
-        <div class="theme-panel rocket">
-          <div class="tabbar">
-            <button class="tab-btn active">Arenalar</button>
-            <button class="tab-btn">Modlar</button>
-            <button class="tab-btn">Mekanikler</button>
-            <button class="tab-btn">Taktikler</button>
-          </div>
-
-          <div id="rocket-content" class="panel-grid"></div>
-        </div>
-      </section>
-
-      <section id="tactics" class="container">
-        <div class="section-head">
-          <div>
-            <h2>Taktikler</h2>
-          </div>
-          <p>Oyun bazlı özel plan ve yaklaşım listeleri</p>
-        </div>
-
-        <div class="theme-panel">
-          <div class="tabbar">
-            <button class="tab-btn active" data-game="valorant">VALORANT</button>
-            <button class="tab-btn" data-game="rocket">Rocket League</button>
-          </div>
-
-          <div id="tactics-content" class="panel-grid"></div>
-        </div>
-      </section>
-
-      <section class="container">
-        <div class="stats-row">
-          <div class="stat">
-            <strong>120+</strong>
-            <span>Rehber içerik</span>
-          </div>
-          <div class="stat">
-            <strong>42</strong>
-            <span>Detaylı taktik yazısı</span>
-          </div>
-          <div class="stat">
-            <strong>18</strong>
-            <span>Özel mod rehberi</span>
-          </div>
-          <div class="stat">
-            <strong>4.9/5</strong>
-            <span>Kullanıcı memnuniyeti</span>
-          </div>
-        </div>
-      </section>
-
-      <section id="faq" class="container">
-        <div class="section-head">
-          <div>
-            <h2>SSS / Bilgi</h2>
-          </div>
-          <p>Sık sorulan sorular ve açıklamalar</p>
-        </div>
-
-        <div class="faq-list" id="faq-list"></div>
-      </section>
-    </main>
-
-    <script src="script.js"></script>
-  </body>
+  <script src="script.js"></script>
+</body>
 </html>
