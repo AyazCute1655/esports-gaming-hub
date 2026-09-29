@@ -1,407 +1,657 @@
 :root {
-  --bg: #0d1117;
-  --panel: #141b24;
-  --panel-2: #1b2430;
-  --text: #eef4ff;
-  --muted: #9bb0c6;
-  --line: rgba(255,255,255,0.08);
-
-  --valorant-red: #ff4655;
-  --valorant-red-soft: #ff6b76;
-  --rocket-blue: #2f9bff;
-  --rocket-cyan: #64d8ff;
-  --rocket-yellow: #ffc857;
-
-  --card-shadow: 0 14px 30px rgba(0,0,0,0.25);
+  /* VALORANT Colors */
+  --val-primary: #ff4655;
+  --val-secondary: #0f1419;
+  --val-bg: #0a0e11;
+  --val-text: #f5f5f5;
+  --val-muted: #9fa3a8;
+  --val-accent: #ffd60a;
+  
+  /* ROCKET Colors */
+  --rl-primary: #2f9bff;
+  --rl-secondary: #1a1a2e;
+  --rl-bg: #0f0f1e;
+  --rl-text: #ffffff;
+  --rl-muted: #808080;
+  --rl-accent: #ffc857;
 }
 
 * {
   box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
-  font-family: Inter, Arial, sans-serif;
-  background: linear-gradient(180deg, #0b0f14 0%, #121922 100%);
-  color: var(--text);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: all 0.3s ease;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-img {
-  max-width: 100%;
-  display: block;
-}
-
-.container {
-  width: min(1200px, calc(100% - 32px));
-  margin: 0 auto;
-}
-
-.topbar {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  backdrop-filter: blur(10px);
-  background: rgba(12, 16, 22, 0.8);
-  border-bottom: 1px solid var(--line);
-}
-
-.nav {
+/* ====== LANDING PAGE ====== */
+.landing-page {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  min-height: 72px;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.brand-mark {
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
-  display: grid;
-  place-items: center;
-  font-weight: 900;
-  color: white;
-  background: linear-gradient(135deg, var(--valorant-red), var(--rocket-blue));
-}
-
-.nav-links {
-  display: flex;
-  gap: 18px;
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-
-.nav-links a:hover {
-  color: var(--text);
-}
-
-.btn {
-  border: none;
-  border-radius: 12px;
-  padding: 12px 18px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-.btn.primary {
-  background: linear-gradient(135deg, var(--valorant-red), #d81c2f);
-  color: white;
-  box-shadow: 0 8px 20px rgba(255,70,85,0.35);
-}
-
-.btn.secondary {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid var(--line);
-  color: var(--text);
-}
-
-.hero {
-  padding: 68px 0 24px;
-}
-
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.3fr 0.7fr;
-  gap: 24px;
-}
-
-.hero-main {
-  background: linear-gradient(135deg, rgba(255,70,85,0.12), rgba(31,44,61,0.2));
-  border: 1px solid var(--line);
-  border-radius: 28px;
-  padding: 36px;
-  min-height: 330px;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
-  position: relative;
-  overflow: hidden;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0e11 0%, #1a1f26 100%);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
-.hero-main::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at top left, rgba(255,70,85,0.25), transparent 40%),
-    radial-gradient(circle at bottom right, rgba(47,155,255,0.2), transparent 35%);
+.landing-page.hidden {
+  opacity: 0;
+  visibility: hidden;
   pointer-events: none;
 }
 
-.hero-main > * {
-  position: relative;
-  z-index: 1;
+.landing-shell {
+  text-align: center;
+  animation: fadeInDown 0.8s ease-out;
 }
 
-.eyebrow {
-  display: inline-flex;
-  width: fit-content;
-  padding: 8px 12px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
-  font-size: 0.76rem;
-  letter-spacing: 0.08em;
+.landing-header {
+  margin-bottom: 60px;
+}
+
+.landing-header .eyebrow {
+  display: inline-block;
+  color: #888;
+  font-size: 12px;
+  letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--muted);
+  margin-bottom: 15px;
+  animation: slideInDown 0.6s ease-out;
 }
 
-h1 {
-  margin: 18px 0 12px;
-  font-size: clamp(2.2rem, 5vw, 4rem);
-  line-height: 1;
+.landing-header h1 {
+  font-size: 4rem;
+  color: #fff;
+  margin: 20px 0;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  animation: slideInDown 0.6s ease-out 0.1s both;
 }
 
-.hero-sub {
-  color: var(--muted);
-  max-width: 620px;
-  font-size: 1.05rem;
+.landing-header p {
+  font-size: 1.1rem;
+  color: #aaa;
+  max-width: 500px;
+  margin: 0 auto;
+  animation: slideInDown 0.6s ease-out 0.2s both;
 }
 
-.hero-buttons {
-  display: flex;
-  gap: 14px;
-  margin-top: 22px;
-  flex-wrap: wrap;
-}
-
-.hero-side {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 28px;
-  padding: 22px;
-}
-
-.mini-list {
+.game-grid {
   display: grid;
-  gap: 16px;
-  margin-top: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+  max-width: 900px;
 }
 
-.mini-card {
-  padding: 16px;
-  border-radius: 18px;
-  background: var(--panel-2);
-  border: 1px solid var(--line);
-}
-
-.mini-card strong {
-  display: block;
-  margin-bottom: 4px;
-}
-
-.mini-card small {
-  color: var(--muted);
-}
-
-section {
-  padding: 20px 0 10px;
-}
-
-.section-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  margin-bottom: 18px;
-}
-
-.section-head h2 {
-  margin: 0;
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
-}
-
-.section-head p {
-  margin: 0;
-  color: var(--muted);
-}
-
-.card {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  overflow: hidden;
-  box-shadow: var(--card-shadow);
-}
-
-.card-visual {
-  height: 150px;
-  background: linear-gradient(135deg, rgba(255,70,85,0.16), rgba(29,34,43,0.2));
-}
-
-.card-content {
-  padding: 18px;
-}
-
-.tag-row {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
-}
-
-.tag {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid var(--line);
-  color: var(--muted);
-  border-radius: 999px;
-  padding: 6px 10px;
-  font-size: 0.72rem;
-}
-
-.card h3 {
-  margin: 0 0 8px;
-  font-size: 1.2rem;
-}
-
-.card p {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.6;
-}
-
-.stats-row {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
-  margin-top: 24px;
-}
-
-.stat {
-  background: var(--panel);
-  border: 1px solid var(--line);
+.game-card {
+  position: relative;
+  padding: 40px 30px;
+  border: 2px solid;
   border-radius: 20px;
-  padding: 18px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  animation: slideInUp 0.6s ease-out 0.3s both;
 }
 
-.stat strong {
-  display: block;
+.game-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: translateX(-100%);
+}
+
+.game-card:hover::before {
+  transform: translateX(100%);
+  transition: transform 0.6s ease;
+}
+
+.valorant-card {
+  border-color: #ff4655;
+  color: #fff;
+}
+
+.valorant-card:hover {
+  border-color: #ffd60a;
+  box-shadow: 0 0 40px rgba(255, 70, 85, 0.5), inset 0 0 20px rgba(255, 70, 85, 0.1);
+  transform: translateY(-8px);
+  background: rgba(255, 70, 85, 0.08);
+}
+
+.rocket-card {
+  border-color: #2f9bff;
+  color: #fff;
+}
+
+.rocket-card:hover {
+  border-color: #ffc857;
+  box-shadow: 0 0 40px rgba(47, 155, 255, 0.5), inset 0 0 20px rgba(47, 155, 255, 0.1);
+  transform: translateY(-8px);
+  background: rgba(47, 155, 255, 0.08);
+}
+
+.game-badge {
+  display: inline-block;
+  font-weight: 900;
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+
+.valorant-card .game-badge {
+  background: rgba(255, 70, 85, 0.2);
+  color: #ff4655;
+  border: 1px solid #ff4655;
+}
+
+.rocket-card .game-badge {
+  background: rgba(47, 155, 255, 0.2);
+  color: #2f9bff;
+  border: 1px solid #2f9bff;
+}
+
+.game-icon {
+  font-size: 60px;
+  margin: 15px 0;
+}
+
+.game-card h2 {
   font-size: 1.8rem;
-  margin-bottom: 8px;
+  margin: 15px 0 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
-.theme-panel {
-  border-radius: 28px;
-  border: 1px solid var(--line);
-  padding: 26px;
-  margin-top: 10px;
+.game-card p {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-bottom: 20px;
 }
 
-.theme-panel.valorant {
-  background: linear-gradient(135deg, rgba(255,70,85,0.12), rgba(17,20,28,0.9));
+.game-card ul {
+  list-style: none;
+  text-align: left;
+  margin: 20px 0;
+  font-size: 0.85rem;
+  color: #bbb;
 }
 
-.theme-panel.rocket {
-  background: linear-gradient(135deg, rgba(47,155,255,0.12), rgba(17,20,28,0.9));
+.game-card li {
+  padding: 5px 0;
 }
 
-.tabbar {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 18px;
-  flex-wrap: wrap;
+.game-card li::before {
+  content: "◆ ";
+  margin-right: 8px;
 }
 
-.tab-btn {
-  background: rgba(255,255,255,0.04);
-  color: var(--muted);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 10px 16px;
-  cursor: pointer;
+.valorant-card li::before {
+  color: #ff4655;
+}
+
+.rocket-card li::before {
+  color: #2f9bff;
+}
+
+.enter-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 8px;
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
 }
 
-.tab-btn.active {
-  background: rgba(255,255,255,0.08);
-  color: var(--text);
-  border-color: rgba(255,255,255,0.12);
+.valorant-card:hover .enter-btn {
+  background: #ff4655;
+  color: white;
 }
 
-.panel-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
+.rocket-card:hover .enter-btn {
+  background: #2f9bff;
+  color: white;
 }
 
-.strategy-card {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  padding: 18px;
+/* ====== VALORANT APP ====== */
+.valorant-app body {
+  background: linear-gradient(180deg, var(--val-bg) 0%, #1a1f26 100%);
+  color: var(--val-text);
 }
 
-.strategy-card h4 {
-  margin: 0 0 10px;
+.valorant-app .game-header {
+  background: linear-gradient(90deg, rgba(15, 20, 25, 0.95), rgba(10, 14, 17, 0.95));
+  border-bottom: 2px solid var(--val-primary);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  animation: slideDown 0.5s ease-out;
 }
 
-.strategy-card p {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.6;
-}
-
-.faq-list {
-  display: grid;
-  gap: 14px;
-}
-
-.faq-item {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  overflow: hidden;
-}
-
-.faq-q {
-  padding: 18px 20px;
+.valorant-app .header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 30px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  min-height: 70px;
+}
+
+.valorant-app .brand-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 900;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.valorant-app .brand-mark {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--val-primary), #d81c2f);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  color: white;
+  font-weight: 900;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 70, 85, 0.4); }
+  50% { box-shadow: 0 0 40px rgba(255, 70, 85, 0.8); }
+}
+
+.valorant-app .game-nav {
+  display: flex;
+  gap: 25px;
+  flex: 1;
+  margin-left: 50px;
+}
+
+.valorant-app .game-nav a {
+  color: var(--val-muted);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  position: relative;
+  padding-bottom: 5px;
+}
+
+.valorant-app .game-nav a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--val-primary);
+  transition: width 0.3s ease;
+}
+
+.valorant-app .game-nav a:hover {
+  color: var(--val-primary);
+}
+
+.valorant-app .game-nav a:hover::after {
+  width: 100%;
+}
+
+.valorant-app .back-btn {
+  background: rgba(255, 70, 85, 0.1);
+  color: var(--val-primary);
+  border: 1px solid var(--val-primary);
+  padding: 8px 16px;
+  border-radius: 6px;
   cursor: pointer;
   font-weight: 700;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  font-size: 0.85rem;
 }
 
-.faq-a {
-  display: none;
-  padding: 0 20px 18px;
-  color: var(--muted);
-  line-height: 1.7;
+.valorant-app .back-btn:hover {
+  background: var(--val-primary);
+  color: white;
+  transform: translateX(-3px);
 }
 
-.faq-item.active .faq-a {
+.valorant-app .game-layout {
+  display: flex;
+  min-height: calc(100vh - 70px);
+}
+
+.valorant-app .game-sidebar {
+  width: 250px;
+  background: rgba(15, 20, 25, 0.5);
+  border-right: 1px solid rgba(255, 70, 85, 0.2);
+  padding: 30px 0;
+  overflow-y: auto;
+}
+
+.valorant-app .sidebar-box h3 {
+  padding: 0 20px 15px;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--val-primary);
+  border-bottom: 1px solid rgba(255, 70, 85, 0.2);
+  margin-bottom: 15px;
+}
+
+.valorant-app .sidebar-box ul {
+  list-style: none;
+}
+
+.valorant-app .sidebar-box a {
   display: block;
+  padding: 12px 20px;
+  color: var(--val-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  border-left: 3px solid transparent;
 }
 
-.faq-item.active .faq-q {
-  border-bottom: 1px solid var(--line);
+.valorant-app .sidebar-box a:hover {
+  background: rgba(255, 70, 85, 0.1);
+  color: var(--val-primary);
+  border-left-color: var(--val-primary);
+  padding-left: 25px;
 }
 
-@media (max-width: 900px) {
-  .hero-grid,
-  .panel-grid,
-  .stats-row {
+.valorant-app .game-main {
+  flex: 1;
+  padding: 40px;
+  background: linear-gradient(135deg, rgba(10, 14, 17, 0.5), rgba(26, 31, 38, 0.5));
+}
+
+.valorant-app .hidden {
+  display: none;
+}
+
+/* ====== ROCKET LEAGUE APP ====== */
+.rocket-app body {
+  background: linear-gradient(180deg, var(--rl-bg) 0%, #252541 100%);
+  color: var(--rl-text);
+}
+
+.rocket-app .game-header {
+  background: linear-gradient(90deg, rgba(26, 26, 46, 0.95), rgba(15, 15, 30, 0.95));
+  border-bottom: 3px solid var(--rl-primary);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  animation: slideDown 0.5s ease-out;
+}
+
+.rocket-app .header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 70px;
+}
+
+.rocket-app .brand-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 900;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.rocket-app .brand-mark {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--rl-primary), #64d8ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: white;
+  font-weight: 900;
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.rocket-app .game-nav {
+  display: flex;
+  gap: 25px;
+  flex: 1;
+  margin-left: 50px;
+}
+
+.rocket-app .game-nav a {
+  color: var(--rl-muted);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  position: relative;
+  padding-bottom: 5px;
+}
+
+.rocket-app .game-nav a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--rl-primary), var(--rl-accent));
+  transition: width 0.3s ease;
+}
+
+.rocket-app .game-nav a:hover {
+  color: var(--rl-primary);
+}
+
+.rocket-app .game-nav a:hover::after {
+  width: 100%;
+}
+
+.rocket-app .back-btn {
+  background: rgba(47, 155, 255, 0.1);
+  color: var(--rl-primary);
+  border: 2px solid var(--rl-primary);
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.rocket-app .back-btn:hover {
+  background: var(--rl-primary);
+  color: white;
+  transform: scale(1.05);
+}
+
+.rocket-app .game-layout {
+  display: flex;
+  min-height: calc(100vh - 70px);
+}
+
+.rocket-app .game-sidebar {
+  width: 250px;
+  background: rgba(26, 26, 46, 0.5);
+  border-right: 2px solid var(--rl-primary);
+  padding: 30px 0;
+  overflow-y: auto;
+}
+
+.rocket-app .sidebar-box h3 {
+  padding: 0 20px 15px;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--rl-accent);
+  border-bottom: 2px solid var(--rl-primary);
+  margin-bottom: 15px;
+}
+
+.rocket-app .sidebar-box ul {
+  list-style: none;
+}
+
+.rocket-app .sidebar-box a {
+  display: block;
+  padding: 12px 20px;
+  color: var(--rl-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  border-left: 3px solid transparent;
+  position: relative;
+}
+
+.rocket-app .sidebar-box a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--rl-primary), var(--rl-accent));
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+}
+
+.rocket-app .sidebar-box a:hover {
+  background: rgba(47, 155, 255, 0.15);
+  color: var(--rl-accent);
+  padding-left: 25px;
+}
+
+.rocket-app .sidebar-box a:hover::before {
+  transform: scaleY(1);
+}
+
+.rocket-app .game-main {
+  flex: 1;
+  padding: 40px;
+  background: linear-gradient(135deg, rgba(15, 15, 30, 0.5), rgba(37, 37, 65, 0.5));
+}
+
+.rocket-app .hidden {
+  display: none;
+}
+
+/* ====== ANIMATIONS ====== */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
+  .game-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
 
-  .nav-links {
+  .landing-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .valorant-app .game-layout,
+  .rocket-app .game-layout {
+    flex-direction: column;
+  }
+
+  .valorant-app .game-sidebar,
+  .rocket-app .game-sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid;
+  }
+
+  .valorant-app .game-nav,
+  .rocket-app .game-nav {
     display: none;
+  }
+
+  .valorant-app .game-main,
+  .rocket-app .game-main {
+    padding: 20px;
   }
 }
