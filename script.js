@@ -1,148 +1,135 @@
-const valorantAgents = [
-  { title: "Brimstone", tags: ["Controller", "Smoke", "Team"], text: "Takımın ön hat kontrolünü kuran güçlü destek ajanı.", detail: "Brimstone ile harita kontrolü ve takım istikrarı kur. Smoke ve stim kullanımını koordine ederek girişleri güvenli hale getir." },
-  { title: "Viper", tags: ["Controller", "Poison", "Area"], text: "Zehir duvarlarıyla harita kontrolü sağlar.", detail: "Viper, harita üzerindeki kritik alanları zayıflatır. Poison Cloud ve Toxic Screen ile post-plant ve retake planlarını etkili hale getir." },
-  { title: "Omen", tags: ["Controller", "Shadow", "Utility"], text: "Görüş kesen ve sahte rotasyon sağlayan savaşçı.", detail: "Omen ile rakibin gözünden kaçan rotasyonlar kur. Teleport ve smoke kombinasyonu, site girişi sırasında çok değerlidir." },
-  { title: "Astra", tags: ["Controller", "Map", "Utility"], text: "Kozmik kontrollü, sahneyi yöneten ajan.", detail: "Astra'nın yıldızlarıyla her açıdan baskı kur. Geçiş noktalarını ve kontrol bölgelerini hazır tut." },
-  { title: "Jett", tags: ["Duelist", "Entry", "Mobility"], text: "Mobilite ve hızlı giriş odaklı ajan.", detail: "Jett ile agresif site girişleri ve temiz çıkışlar yap. Dash ve upward movement ile yüksek riskli pozisyonları kontrol eder." },
-  { title: "Raze", tags: ["Duelist", "Explosive", "Entry"], text: "Patlayıcı agresif oyun için biçilmiş kaftan.", detail: "Raze, site açılışlarında teması ve kontrolü sağlar. Paint Shells ve Boom Bot ile rakibi basar." },
-  { title: "Reyna", tags: ["Duelist", "Self-Sufficient", "Aggression"], text: "Kills ile güçlenen, tek başına baskı kuran ajan.", detail: "Reyna ile kill sonrası güçlenir ve tek başına savunma kırabilir. Giriş planlarında dikkatli oynanmalıdır." },
-  { title: "Yoru", tags: ["Duelist", "Flank", "Fakeout"], text: "Alternatif rota ve sahte oyun için güçlü seçenek.", detail: "Yoru, rakibin gözünü yanıltır. Fakeout ve portal ile farklı açılardan baskı kurabilir." },
-  { title: "Phoenix", tags: ["Duelist", "Flash", "Entry"], text: "Flash ve ateş kontrolüyle agresif giriş yapan ajan.", detail: "Phoenix, flash yardımıyla girişlerde rakibi şaşırtır. Team play için ideal temizlik ve hava kontrolü sunar." },
-  { title: "Neon", tags: ["Duelist", "Fast", "Dash"], text: "Hızlı nerede ise orada olan agresif ajan.", detail: "Neon, çok hızlı hareket eder. Hızlı site akışı ve hızlı yan hamleler için çok güçlüdür." },
-  { title: "Iso", tags: ["Duelist", "One-v-One", "High Skill"], text: "Tek kişilik savaş ve güçlü pekiştirme sağlar.", detail: "Iso, karşılaşmada tekli takas gücüyle öne çıkar. 1v1'lerde daha agresif davranış sağlar." },
-  { title: "Fade", tags: ["Initiator", "Info", "Trail"], text: "Rakibin hareketini kısıtlayan takip ve bilgi ajanı.", detail: "Fade, Seize ile rakibin konumunu tahmin etmede çok etkilidir. Harita kontrolünü takımına kazandırır." },
-  { title: "Harbor", tags: ["Controller", "Water", "Slow"], text: "Su kontrolüyle alan ve yön kontrolü sağlayan ajan.", detail: "Harbor, can sıkıcı alanı kilitler. Cascade ve High Tide ile pozisyonları güçlendirir." },
-  { title: "Killjoy", tags: ["Sentinel", "Defense", "Lock"], text: "Turret ve Lockdown ile savunma alanını yöneten ajan.", detail: "Killjoy, retake ve site savunma için ciddi kontrol sağlar. Turret ve alarm sistemi çok etkilidir." },
-  { title: "Chamber", tags: ["Sentinel", "Sniper", "Setup"], text: "Uzun menzilli kontrol ve setup odaklı ajan.", detail: "Chamber, sniping ve map setup açısından çok güçlü. Tour De Force ve Rendezvous ile açıları kapatır." },
-  { title: "Cypher", tags: ["Sentinel", "Trap", "Information"], text: "Rakibin konumunu ortaya çıkaran bilgi ajanı.", detail: "Cypher, trap'lerle düşmanı kıstırır ve kısıtlar. Site savunmasında çok güçlü bir seçenek." },
-  { title: "Deadlock", tags: ["Sentinel", "Wall", "Lock"], text: "Yüksek kontrol ile savunma ve alan kilidi kurar.", detail: "Deadlock, alana ağır kontrol sunar. Zone ve durdurma yetenekleri savunma planlarında çok güçlüdür." },
-  { title: "Vyse", tags: ["Sentinel", "Trap", "Defense"], text: "Basınçlı savunma ve engel kuran ajan.", detail: "Vyse ile yüksek kontrol ve alan kilidi kur. Aşırı hareketi kısıtlayarak savunmada öne çıkar." },
-  { title: "Sova", tags: ["Initiator", "Recon", "Intel"], text: "Harita bilgisi ve bilgi toplayan ajan.", detail: "Sova, Recon Bolt ve drone ile rakip pozisyonunu ortaya çıkarır. Takım için kritik bilgi kaynağıdır." },
-  { title: "Sage", tags: ["Sentinel", "Support", "Heal"], text: "Team sustain ve barier konusunda sağlam destek.", detail: "Sage, barrier ve heal ile takımın hayatını uzatır. Plant ve retake planını çok güçlü hale getirir." },
-  { title: "Skye", tags: ["Initiator", "Recon", "Support"], text: "Takım için bilgi ve mobilite sağlayan ajan.", detail: "Skye, her iki ekibin açısında da avantaj sağlar. Hızlı rota ve bilgi verme yetenekleri güçlüdür." },
-  { title: "Breach", tags: ["Initiator", "Flash", "Control"], text: "Yüksek kontrol ve flash ile agresif girişler sağlar.", detail: "Breach, flash ve stun ile rakibin pozisyonunu bozup ilerler. Giriş ve retake anlarında çok etkili." },
-  { title: "KAY/O", tags: ["Initiator", "Suppression", "Area"], text: "Alanda kontrol ve suppress ile baskı kuran ajan.", detail: "KAY/O, yetenekleriyle rakibin giriş paternlerini bozar. Plan üzerinde yüksek kontrol sağlar." },
-  { title: "Gekko", tags: ["Initiator", "Utility", "Entry"], text: "Wingman ve agresif kontrol yetenekleriyle giriş yapan ajan.", detail: "Gekko, Wingman ile alternatif ve teknik girişler sağlar. Harita üzerinde çok yönlü kontrol sunar." },
-  { title: "Waylay", tags: ["Initiator", "Fast", "Control"], text: "Hızlı kontrol ve flow yaratır.", detail: "Waylay, site girişlerinde rakip konumlarını bozar. Mobilite ve kontrolü birleştirir." },
-  { title: "Clove", tags: ["Controller", "Smokes", "Self"], text: "Kendine dayalı ve takım için hız kazandıran ajan.", detail: "Clove, bilgi ve kişisel kontrol gücüyle takımı yatıştırır. Kritik anlarda alan denetimi sağlar." },
-  { title: "Tejo", tags: ["Controller", "Utility", "Fire"], text: "Açık alanları kontrol eden yüksek stratejik ajan.", detail: "Tejo, araçlarını kullanarak rakibin pozisyonunu kırar. Harita kontrolü ve oryantasyon için çok uygundur." }
-];
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ESPORTS GATE</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="landing" class="landing-page active">
+      <div class="landing-shell">
+        <div class="landing-header">
+          <span class="eyebrow">HANGİ OYUNA GİRECEKSİN?</span>
+          <h1>ESPORTS GATE</h1>
+          <p>VALORANT ve Rocket League için ayrı, profesyonel ve özel rehber arayüzleri.</p>
+        </div>
 
-const valorantWeapons = [
-  { title: "Classic", tags: ["Pistol", "Default"], text: "Varsayılan silah. Ekonomik ve güvenilir.", detail: "Classic, her round için güvenli bir başlangıç silahıdır. Kestirme ve bilgi için çok iyi bir seçenek." },
-  { title: "Shorty", tags: ["Shotgun", "Close Range"], text: "Kısa menzilde çok güçlü keskin silah.", detail: "Shorty, kapalı alanlarda ve site girişlerinde çok etkilidir. Rakibin yaklaşımını engellemeye yarar." },
-  { title: "Frenzy", tags: ["SMG", "Aggressive"], text: "Hızlı ateş ve agressif giriş için güçlü.", detail: "Frenzy, kısa menzilde çok iyi iş çıkarır. Giriş ve push sırasında çok faydalıdır." },
-  { title: "Ghost", tags: ["Pistol", "Control"], text: "Daha kontrollü ve güvenli bir pistol seçeneği.", detail: "Ghost, ekonomi başlatırken ve düşük maliyetli oyunlarda güvenli bir tercih olur." },
-  { title: "Sheriff", tags: ["Pistol", "High Skill"], text: "Tek atışlık hasar ve yüksek risk.", detail: "Sheriff, iyi oynayan oyuncu için çok güçlü ama yüksek kontrol gerektirir." },
-  { title: "Stinger", tags: ["SMG", "Budget"], text: "Ekonomik ve hızlı ateş eden silah.", detail: "Stinger, yön kontrolü ve kısa menzil agresifliği için idealdir." },
-  { title: "Spectre", tags: ["SMG", "Reliable"], text: "Kısa ve orta menzil için güvenli seçenek.", detail: "Spectre, site girişi ve özellikle pushlerde çok iyi bir seçimdir. Kontrolü biraz öğrenmek gerekir." },
-  { title: "Bulldog", tags: ["Rifle", "Budget"], text: "Ekonomik ve sağlam bir rifle alternatifi.", detail: "Bulldog, orta menzilde düzenli bir atış profili sağlar. Bütçeli setup için çok iyi." },
-  { title: "Guardian", tags: ["Rifle", "Stable"], text: "Ekonomik rifle ve kontrolü iyi bir seçenek.", detail: "Guardian, orta menzilde düzenli ve güvenli oynanır. Düşük maliyetle güçlü bir tercih yaratır." },
-  { title: "Phantom", tags: ["Rifle", "Meta"], text: "Düzenli spray ve kontrollü menzil sunar.", detail: "Phantom, orta ve kısa menzilde çok güçlüdür. Yeni başlayanlar için düzenli ve güvenli bir wybor." },
-  { title: "Vandal", tags: ["Rifle", "Meta"], text: "Yüksek hasarıyla çok güçlü ana rifle.", detail: "Vandal, özellikle uzun menzil ve yüksek riskli pozisyonlarda çok güçlüdür." },
-  { title: "Marshal", tags: ["Sniper", "Precision"], text: "Duyarlı, yüksek değerli sniper.", detail: "Marshal, yüksek yetenekle buralarda güçlü bir aralıktır. Kısa ve orta menzilde kontrol gerektirir." },
-  { title: "Outlaw", tags: ["Sniper", "High Damage"], text: "Yüksek hasarla eline güven veren güncel sniper.", detail: "Outlaw, doğru line-up ile çok güçlü. Kısa ve uzun menzilde riskli ama yüksek değerli." },
-  { title: "Operator", tags: ["Sniper", "One Shot"], text: "Tek atışla öldüren çok güçlü sniper.", detail: "Operator, iyi posizyonlanma ve iyi nişan gerektirir. her play'de çok çok kritik bir role sahiptir." },
-  { title: "Bucky", tags: ["Shotgun", "Heavy"], text: "Yakın menzilde ölümcül shotgun.", detail: "Bucky, site içi girişlerde ve kısa menzilde çok etkili. Her zaman riskli ama güçlü." },
-  { title: "Judge", tags: ["Shotgun", "Heavy"], text: "Kısa menzilde çok sayıda pellet sunan shotgun.", detail: "Judge, kapalı alanlarda çok güçlü. Giriş ve site içi kontrol için mükemmel." },
-  { title: "Ares", tags: ["Heavy", "Machine Gun"], text: "Yüksek magazin ve ağır kontrol silahı.", detail: "Ares, süratli düzenli ateş ile kontrol sağlar. Özellikle push ve retake döngülerinde çok güçlü." },
-  { title: "Odin", tags: ["Heavy", "Machine Gun"], text: "Yüksek ateş gücüne sahip ağır makine tüfeği.", detail: "Odin, alan kontrolü ve yüksek baskı için çok değerlidir. Tek başına site savunmasını kurar." },
-  { title: "Melee", tags: ["Utility", "Close Combat"], text: "Yakın dövüş ve hızlı situational kullanım.", detail: "Melee, silahın ön yüzüne gelir ama temel oyun mantığı rosa da importance. Kapalı alan ve ace anlarında kimlik kazandırır." }
-];
+        <div class="game-grid">
+          <button type="button" class="game-card valorant-card" data-game="valorant">
+            <div class="game-badge">V</div>
+            <div class="game-icon">⚔️</div>
+            <h2>VALORANT</h2>
+            <p>Rekabetçi FPS rehberleri</p>
+            <ul>
+              <li>22+ Ajan</li>
+              <li>7 Harita</li>
+              <li>Profesyonel Taktikler</li>
+            </ul>
+            <span class="enter-btn">GİR</span>
+          </button>
 
-const valorantMaps = [
-  { title: "Ascent", tags: ["A/B Site", "Mid Control"], text: "Mid kontrolünün round sonucunu doğrudan etkilediği harita.", detail: "Saldırıda mid kontrolüyle A veya B site rotasyonunu aç. Savunmada uzun koridor ve lane utility'sini retake için kullan." },
-  { title: "Haven", tags: ["A/B/C Site", "3 Site"], text: "Üç site yapısıyla geniş rotasyon seçenekleri sunar.", detail: "Açığı erken kapatmak için C ve A yapısını koordine et. Saldırıda hızlı C veya A takımı kurup mid'i kontrol et." },
-  { title: "Bind", tags: ["A/B Site", "Teleport"], text: "Teleport sistemiyle hızlı rotasyon ve baskı kuran harita.", detail: "Teleporti hızlı site dönüşü için kullan. Hookah ve Showers atak noktasını kontrol ederek baskı uygula." },
-  { title: "Lotus", tags: ["A/B/C Site", "Doors"], text: "Kapılar ve çoklu site yapısıyla tempolu harita.", detail: "Door ve cam açılışlarını dikkatle izle. Root ve Rubble kontrolüyle C veya A açılışını kolaylaştır." },
-  { title: "Icebox", tags: ["A/B Site", "Unique"], text: "Yükseklik ve katmanlı planla kontrol kıran harita.", detail: "Bilevel ve boost rotasyonlarını iyi kullan. Real man attention to mid and RT lane." },
-  { title: "Split", tags: ["A/B Site", "Vertical"], text: "Yüksek ve alçak noktalardan kontrol sağlayan harita.", detail: "Mid kontrolü çok kritik. Ropeline ve üst katın taktik kullanımını iyi öğren." },
-  { title: "Pearl", tags: ["A/B Site", "Water"], text: "Su motifli ve daha açık mekanik yapı.", detail: "Açık koridor kontrolleri ve daha kısa oyun akışı için iyi şekilde okuma yap." },
-  { title: "Sunset", tags: ["A/B Site", "Open"], text: "Yüksek mobilite ve alternatif oynanış.", detail: "Rota ve açı kontrolü çok belirleyicidir. Girişler burada çok türlü olabilir." },
-  { title: "Lotus", tags: ["A/B/C Site", "Doors"], text: "Kapılar ve çoklu site yapısıyla tempolu harita.", detail: "Door ve cam açılışlarını dikkatle izle. Root ve Rubble kontrolüyle C veya A açılışını kolaylaştır." }
-];
+          <button type="button" class="game-card rocket-card" data-game="rocket">
+            <div class="game-badge">RL</div>
+            <div class="game-icon">🚗</div>
+            <h2>ROCKET LEAGUE</h2>
+            <p>Sportif, hızlı, mekanik rehber</p>
+            <ul>
+              <li>Arabalar</li>
+              <li>Aerial sistem</li>
+              <li>Rotasyon taktikleri</li>
+            </ul>
+            <span class="enter-btn">GİR</span>
+          </button>
+        </div>
+      </div>
+    </div>
 
-const valorantTactics = [
-  { title: "Site Girişi", tags: ["Attack", "Entry"], text: "Entry, flash ve smoke sırasını doğru planla.", detail: "Önce bilgi topla, sonra flashla ve site girişini aç. Takımın aynı anda girmesi trade ve imha riskini azaltır." },
-  { title: "Retake Planı", tags: ["Defense", "Retake"], text: "Utility'yi erken tüketmeden takım halinde geri al.", detail: "Retake'de iki farklı açı oluştur. Spike taşıyıcısını hedef al ve kritik rotasyonda oyun kur." },
-  { title: "Eco Round", tags: ["Economy", "Round"], text: "Düşük kredi turunda agresif ama dengeli davran.", detail: "Tek başına duel aramak yerine trade zinciri kur. Kısa menzilli silah ve komutla birlikte ilerle." },
-  { title: "Ajan Kombinasyonu", tags: ["Composition", "Team"], text: "Duygu ve kontrol kombinasyonu kur.", detail: "Jett + Omen + Sova ağının kontrol güçlenir. Sage veya Killjoy eklenince site savunma daha güvenli olur." },
-  { title: "Post-Plant", tags: ["Attack", "Defense"], text: "Spike yerleştikten sonra en iyi oyun anlamı.", detail: "Spike etrafında oluşan rotasyonları önceden gör. En tehlikeli açıdan zayıf noktayı kur." }
-];
+    <div id="valorant-app" class="game-app hidden valorant-app">
+      <header class="game-header valorant-header">
+        <div class="header-inner">
+          <div class="brand-block">
+            <span class="brand-mark">V</span>
+            <span>VALORANT</span>
+          </div>
 
-const rocketCars = [
-  { title: "Octane", tags: ["Import", "Hitbox"], text: "Profesyonel seviyede en çok tercih edilen araç.", detail: "Dengeli hitbox ve recovery yeteneği sayesinde 1v1 ve takım oyununda güvenli bir seçimdir." },
-  { title: "Dominus", tags: ["Import", "Ground"], text: "Uzatılmış gövdesiyle güçlü flick ve kontrol sağlar.", detail: "Ground dribble ve flick için uygundur. Backboard ve wall play'de çok etkilidir." },
-  { title: "Breakout", tags: ["Common", "Balance"], text: "Dengeli ve rahat kullanım sunar.", detail: "Genel oyun için çok stabil ve uygun. Çekiciliği ve kullanımı kolaydır." },
-  { title: "Merc", tags: ["Common", "Aerial"], text: "Yüksek kontrol ve agresif oyun için tercih edilir.", detail: "Merc ile agresif oyuncular daha bir baskı kurabilir. Aerial ve sürüş akışı iyidir." },
-  { title: "Venom", tags: ["Common", "Speed"], text: "Hız ve tempo için ideal seçim.", detail: "Ön çizgide daha hızlı ve baskıcı oyun için uygundur. Oynanışı ve hissetme açısından net." },
-  { title: "X-Devil", tags: ["Common", "Control"], text: "Birçok oyuncu için çok bilinen ve güvenilir araç.", detail: "Ayrıntılı kontrol, flick ve arka yan devriyesi için uygundur." },
-  { title: "Road Hog", tags: ["Common", "Heavy"], text: "Güçlü vuruş ve karşılaşma için tercih edilir.", detail: "Yüksek koruma ve top kontrolü için olumlu bir seçenek sunar." },
-  { title: "Paladin", tags: ["Common", "High Bounce"], text: "Yüksek karşılaşma ve teması için kullanılır.", detail: "Topa vuruşta güçlü ve kontrolün iyi olduğu bir araç olarak öne çıkar." },
-  { title: "Gizmo", tags: ["Common", "Dribble"], text: "Topu kısa mücadelelerde kontrol eder.", detail: "Daha hafif ve mobil bir seçenek. Push ve dizi tasarımları için uygundur." },
-  { title: "Hotshot", tags: ["Common", "Tempo"], text: "Hızlı tempo için etkili seçenek.", detail: "Hızlı ve kontrollü temasta iyi denge kurar. Oyun akışında önemlidir." },
-  { title: "Backfire", tags: ["Common", "Power"], text: "Yüksek hız ve güç sunan araç.", detail: "Push ve hızlı temas için uygun. Kısa oyunlara uygunluk sağlar." },
-  { title: "Scarab", tags: ["Common", "Boost"], text: "Boost ve control dengesi güçlü.", detail: "Topa yetişmede çok iyi. Boost kullanımında düzenli sonuç verir." },
-  { title: "Zippy", tags: ["Common", "Agile"], text: "Çabuk rotasyonlu araç.", detail: "Aynı anda hızlı yön değişimi ve boost kullanımını uygular." },
-  { title: "Marauder", tags: ["Common", "Heavy"], text: "Dengeli ve kontrol odaklı bazı durumlarda etkili.", detail: "Top kontrolü ve oyun okumaları için tepkiye uygun bir yapı sunar." },
-  { title: "Masamune", tags: ["Import", "Precision"], text: "İyi ikincil kontrole sahip araç.", detail: "Flick yapısı ve kontrol kavramı güçlü. Piyasa arzını iyi taşıyan araçtır." },
-  { title: "Ripper", tags: ["Import", "Power"], text: "Yüksek güç ve agresif kullanım için uygun.", detail: "Top tam temasında güçlü. Kısa mesafe top yönetimi iyi çalışır." },
-  { title: "Grog", tags: ["Import", "Heavy"], text: "Ağır his ve güvenli performans.", detail: "Topa temas anında daha kontrollü ve güvenli binen araç." },
-  { title: "Proteus", tags: ["Import", "Versatile"], text: "Farklı oyun stillerine uygun araç.", detail: "Air ve ground kontrolü dengeli bir yapıya sahiptir." },
-  { title: "Triton", tags: ["Import", "Control"], text: "Dengeli ve yine de baskıcı.", detail: "Top için doğru açılar ve düzenli temas sağlar." },
-  { title: "Vulcan", tags: ["Import", "Power"], text: "Güçlü teması olan araç.", detail: "Orta alan baskısı ve temas etkisi güçlü." },
-  { title: "Takumi", tags: ["Import", "Hitbox"], text: "Hızlı ve kompakt hitbox yapısı.", detail: "Topa müdahale anında çok esnek bir araç olarak öne çıkar." },
-  { title: "Esper", tags: ["Import", "Control"], text: "Temel kullanımda istikrar sağlar.", detail: "Stabil dönüşler ve fazla risk almadan oyun kurma imkanı verir." },
-  { title: "Aftershock", tags: ["Import", "Power"], text: "Power ve kontrol kombinasyonu.", detail: "Topla temasın çok net olduğu araçlar arasında bulunur." },
-  { title: "Mantis", tags: ["Import", "Hybrid"], text: "Hafif ve kontrollü bir araç.", detail: "Air ve ground dengesi iyi teorik olarak pratikte de güçlü." },
-  { title: "Jäger 619", tags: ["Import", "Hybrid"], text: "Yüksek özgün tarzı ve mobilitesiyle öne çıkar.", detail: "Hızlı rotasyonla oyun kurmaya yardımcı olur." },
-  { title: "Centio V17", tags: ["Import", "Advanced"], text: "İleri düzey oyuncular için uygun.", detail: "Kontrol ve temas kombinasyonu için çok iyi bir araç." },
-  { title: "Animus GP", tags: ["Import", "Speed"], text: "Çabuk hamleler için iyi araç.", detail: "Hız ve dönüş için öne çıkar. Oyun akışı ve boost kullanımı başarılıdır." },
-  { title: "Imperator DT5", tags: ["Import", "Heavy"], text: "Ağır ve güçlü temas sunar.", detail: "İyi top kontrolü ve team play için kullanılır." },
-  { title: "Cyclone", tags: ["Import", "Speed"], text: "Sürat ve dönüşte güçlü seçenek.", detail: "Orta alan hızlı temas için idealdir." },
-  { title: "Diestro", tags: ["Import", "Control"], text: "Kontrol anlayışı güçlü araç.", detail: "Daha düzenli ve iyi pozisyon alanında öne çıkar." },
-  { title: "Nimbus", tags: ["Import", "Control"], text: "Hafif mobilite ve kararlılık sağlar.", detail: "Mekanik ve kontrollü top hareketi için uygundur." },
-  { title: "Samurai", tags: ["Import", "Style"], text: "Özellikle duruş ve his açısından güçlü.", detail: "Top ve temas noktası için net görüş felsefe. Zevkle kullanılır." },
-  { title: "Twinzer", tags: ["Import", "Agile"], text: "Hızlı yan hamleler için çok iyi.", detail: "Hızlı yön değişimlerinde öne çıkar. Klasik ve yetenekli oyuncular için uygundur." },
-  { title: "Werewolf", tags: ["Import", "Aggressive"], text: "Agresif oyun için uygun araç.", detail: "Ağır baskı ile açılışta oyun kurmaya yarar." },
-  { title: "Endo", tags: ["Import", "Control"], text: "Kontrolüne güven duyulan araç.", detail: "Daha fazla sübjektif halde hareket ettirilebilir." },
-  { title: "Fennec", tags: ["Import", "Hitbox"], text: "Kısa ve kompakt gövdesiyle hızlı kontrol sağlar.", detail: "Flick ve air dribble için kısa hareket planı kur. Saha içindeki kontrolü kolaylaştırır." },
-  { title: "Maverick", tags: ["Import", "Agile"], text: "Kısa ve çok mobil araç.", detail: "Kısa giriş ve hızlı yön değişimi için faydalı olur." },
-  { title: "Artemis", tags: ["Import", "Speed"], text: "Hızlı vuruş için tercih edilir.", detail: "Teması erken yapmak için çok uygundur." },
-  { title: "Guardian", tags: ["Import", "Hybrid"], text: "Top kontrolü ve denge için uygun.", detail: "Hem ground hem air için dengeli yaklaşım yaratır." },
-  { title: "Chikara", tags: ["Import", "Heavy"], text: "Agresif ve güçlü temas.", detail: "Yakın temas ve baskı için öne çıkar." },
-  { title: "Mudcat", tags: ["Import", "Speed"], text: "Sürat ve karşılaşma için uygun.", detail: "Hızlı dönüşler ve mobilite için sağlıklı performans sunar." },
-  { title: "Ronin", tags: ["Import", "Dribble"], text: "Dribble ve temas sentezi güçlü.", detail: "Top kontrolünü verimli kullanma yanında rotate etmede de güçlü." },
-  { title: "Harbinger", tags: ["Import", "Control"], text: "Kontrol ve düzeni koruyan araç.", detail: "Düzenli hareket ve pozisyon için çok iyi olarak görülür." },
-  { title: "Outlaw", tags: ["Import", "Power"], text: "Yüksek kontrol ve güçlü temas.", detail: "Güvenli top kontrolü ve hızlı yön değişimleri için uygundur." },
-  { title: "Dingo", tags: ["Import", "Hybrid"], text: "Denge odaklı kontrollü araç.", detail: "Orta seviye mekaniklerde güvenli his veren bir seçenektir. Recovery ve rotasyon için uygundur." },
-  { title: "Insidio", tags: ["Import", "Advanced"], text: "Gelişmiş kullanım için uygun araç.", detail: "Gelişmiş tempolu oyunlarda iyi sonuç verir." },
-  { title: "Tygris", tags: ["Import", "Control"], text: "Dengeli ve pozisyonlu kullanım sağlar.", detail: "Stabil his, pozisyon kontrolü ve topa temas için iyi bir seçenek." },
-  { title: "Mamba", tags: ["Import", "Power"], text: "Ön planda güçlü temas sağlar.", detail: "Boot and pressure management için uygundur." },
-  { title: "Jackal", tags: ["Import", "Control"], text: "İyi kullanım hissi ve denge sağlar.", detail: "Push ve rotasyon planında çok güvenli bir seçim." },
-  { title: "Nomad", tags: ["Import", "Speed"], text: "Hız ve yön değişiminde iyi.", detail: "Birçok farklı oyun stilinde kullanılır." },
-  { title: "Komodo", tags: ["Import", "Heavy"], text: "Ağır ve güçlü temas.", detail: "Arka ve orta alanlarda kontrol sunar." },
-  { title: "Maestro", tags: ["Import", "Control"], text: "Dengeli ve akıcı tarz.", detail: "Mekanik ve kontrolleri düzenleme yönünden güçlü." },
-  { title: "Emperor", tags: ["Import", "Power"], text: "Güçlü cisim kalitesi.", detail: "Topa temas esnasında etkin ve güvenli bir seçenek." },
-  { title: "Dominator GT", tags: ["Import", "Heavy"], text: "Ağır tarafı ve güçlü tema sunan araç.", detail: "Top kontrolünde güvenli ve rasyonel bir seçim." },
-  { title: "Octane ZSR", tags: ["Import", "Special"], text: "Özelleştirilmiş Octane sürümü.", detail: "Klasik Octane hissini daha özel versiyonla yaşatır." },
-  { title: "Breakout Type-S", tags: ["Import", "Special"], text: "Özel Breakout çeşidi.", detail: "Klasik Breakout hissinin daha gelişmiş sürümü." },
-  { title: "Dominus GT", tags: ["Import", "Special"], text: "Özel Dominus sürümü.", detail: "Dominus'un daha yüksek hareket ve kontrol sunan varyantı." },
-  { title: "Takumi RX-T", tags: ["Import", "Special"], text: "Özel Takumi versiyonu.", detail: "Hızlı teması ve akışı korur." },
-  { title: "Road Hog XL", tags: ["Import", "Special"], text: "Özel Road Hog versiyonu.", detail: "Agresif ve ağır kullanım için ideal." },
-  { title: "X-Devil Mk2", tags: ["Import", "Special"], text: "Özel X-Devil varyantı.", detail: "Klasik X-Devil için artan kontrol ve yan yönü sunar." },
-  { title: "Armadillo", tags: ["Import", "Defense"], text: "Savunma odaklı kullanım için uygun.", detail: "Topa temasın güvenli ve kontrollü ve baskısız olmasına destek verir." },
-  { title: "Hogsticker", tags: ["Import", "Heavy"], text: "Ağır ve kararlı araç.", detail: "Kısa temas sırasında iyi kontrol sağlar." },
-  { title: "Sweet Tooth", tags: ["Premium", "Heavy"], text: "Daha yüksek kontrol ve karakteristik hissi olan araç.", detail: "Topu daha kontrollü yönlendirme kapasitesi verir." },
-  { title: "Bone Shaker", tags: ["Premium", "Heavy"], text: "Agresif ve güçlü temas sunar.", detail: "Genelde güçlü temas ve kontrol hissi vardır." },
-  { title: "Batmobile", tags: ["Premium", "Legendary"], text: "Batman’ın ünlü aracı.", detail: "Düşük, agresif ve farklı bir oyun tarzı sunar. Takımın gösterişli bir sekans için harika." },
-  { title: "Batmobile (2016)", tags: ["Premium", "Legendary"], text: "2016 Batmobile sürümü.", detail: "Sıkı ve agresif hareket isteyen oyuncular için uygundur." },
-  { title: "Batmobile (2022)", tags: ["Premium", "Legendary"], text: "2022 Batmobile sürümü.", detail: "Baskı ve kontrollü temas için etkili bir araçtır." },
-  { title: "The Dark Knight Tumbler", tags: ["Premium", "Legendary"], text: "Tumbler temalı özel araç.", detail: "Düzenli kontrol ve fark yaratan hareket teslim eder." },
-  { title: "1989 Batmobile", tags: ["Premium", "Legendary"], text: "1989 reytingli Batmobile.", detail: "Karakteristik şekli ve agresif hisi ile özel tasarım sunar." },
-  { title: "DeLorean Time Machine", tags: ["Premium", "Legendary"], text: "Zaman makinesi temalı araç.", detail: "Özellikle karakteristik görünüm ve oyun hisleri ile çok özel bir seçenek." },
-  { title: "Ecto-1", tags: ["Premium", "Legendary"], text: "Ghostbusters ikonik aracı.", detail: "Klasik ve belirgin tasarıma sahip, oyuncular için eğlenceli bir araç." },
-  { title: "K.I.T.T.", tags: ["Premium", "Legendary"], text: "Knight Rider aracının özel sürümü.", detail: "Yüksek karakter ve farklı his sağlar." },
-  { title: "Jurassic Jeep Wrangler", tags: ["Premium", "Legendary"], text: "Jurassic World temalı araç.", detail: "Özel tasarım ve oyun tarzı vererek dikkat çeker." },
-  { title: "Nissan Skyline GT-R R34", tags: ["Premium", "Legendary"], text: "Özel Nissan R34 sürümü.", detail: "Motor ve tasarım tutkunları için çok ikonik bir araç." },
-  { title: "Nissan Silvia RLE", tags: ["Premium", "Legendary"], text: "Silvia RLE özel versiyonu.", detail: "Kontrolcü bir hissi ve karakteristik tasarım.
+          <nav class="game-nav">
+            <a href="#" data-section="home">Ana Sayfa</a>
+            <a href="#" data-section="agents">Ajanlar</a>
+            <a href="#" data-section="maps">Haritalar</a>
+            <a href="#" data-section="weapons">Silahlar</a>
+            <a href="#" data-section="tactics">Taktikler</a>
+            <a href="#" data-section="crosshair">Crosshair</a>
+          </nav>
+
+          <button type="button" class="back-btn" data-back="landing">Geri</button>
+        </div>
+      </header>
+
+      <div class="game-layout">
+        <aside class="game-sidebar valorant-sidebar">
+          <div class="sidebar-box">
+            <h3>MENÜ</h3>
+            <ul>
+              <li><a href="#" data-section="home">🏠 Ana Sayfa</a></li>
+              <li><a href="#" data-section="agents">🧠 Ajanlar</a></li>
+              <li><a href="#" data-section="maps">🗺️ Haritalar</a></li>
+              <li><a href="#" data-section="weapons">🔫 Silahlar</a></li>
+              <li><a href="#" data-section="modes">🎮 Oyun Modları</a></li>
+              <li><a href="#" data-section="tactics">⚡ Taktikler</a></li>
+              <li><a href="#" data-section="crosshair">✦ Crosshair</a></li>
+              <li><a href="#" data-section="updates">📰 Güncellemeler</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <main id="valorant-main" class="game-main"></main>
+      </div>
+    </div>
+
+    <div id="rocket-app" class="game-app hidden rocket-app">
+      <header class="game-header rocket-header">
+        <div class="header-inner">
+          <div class="brand-block">
+            <span class="brand-mark">RL</span>
+            <span>ROCKET LEAGUE</span>
+          </div>
+
+          <nav class="game-nav">
+            <a href="#" data-section="home">Ana Sayfa</a>
+            <a href="#" data-section="cars">Arabalar</a>
+            <a href="#" data-section="arenas">Arenalar</a>
+            <a href="#" data-section="mechanics">Mekanikler</a>
+            <a href="#" data-section="tactics">Taktikler</a>
+            <a href="#" data-section="training">Antrenman</a>
+          </nav>
+
+          <button type="button" class="back-btn" data-back="landing">Geri</button>
+        </div>
+      </header>
+
+      <div class="game-layout">
+        <aside class="game-sidebar rocket-sidebar">
+          <div class="sidebar-box">
+            <h3>MENÜ</h3>
+            <ul>
+              <li><a href="#" data-section="home">🏠 Ana Sayfa</a></li>
+              <li><a href="#" data-section="cars">🚗 Arabalar</a></li>
+              <li><a href="#" data-section="arenas">🏟️ Arenalar</a></li>
+              <li><a href="#" data-section="modes">🎮 Modlar</a></li>
+              <li><a href="#" data-section="mechanics">⚙️ Mekanikler</a></li>
+              <li><a href="#" data-section="aerial">✈️ Aerial</a></li>
+              <li><a href="#" data-section="tactics">⚡ Taktikler</a></li>
+              <li><a href="#" data-section="training">🏋️ Antrenman</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <main id="rocket-main" class="game-main"></main>
+      </div>
+    </div>
+
+    <script src="site-data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
