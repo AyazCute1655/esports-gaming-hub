@@ -1,230 +1,135 @@
-const sectionMap = {
-  valorant: {
-    home: {
-      title: 'VALORANT Rehberi',
-      text: 'Ajanlar, haritalar, silahlar ve taktikler için merkezi rehber.',
-      items: [
-        { title: 'Ajanlar', tags: ['Rehber', 'Takım'], text: 'Ajan rolleri ve kullanım mantığı.', detail: 'Kontrol, duel, giriş ve destek ajanların doğru zamanlarda kullanımı.' },
-        { title: 'Haritalar', tags: ['Harita', 'Kontrol'], text: 'Map kontrol ve pozisyon bilgisi.', detail: 'A/B site ve mil kontrolü, rotasyon ve setup mantığı.' },
-        { title: 'Silahlar', tags: ['Silah', 'Menzil'], text: 'Kalibre, recoil ve yüksek değer silahlar.', detail: 'Phantom, Vandal ve sniper seçimi için doğru kararlar.' },
-        { title: 'Taktikler', tags: ['Taktik', 'Round'], text: 'Round kontrol ve post-plant mantığı.', detail: 'Attack/defense planı ve retake akışı.' }
-      ]
-    },
-    agents: { title: 'Ajanlar', items: (typeof valorantAgents !== 'undefined' ? valorantAgents : []) },
-    maps: { title: 'Haritalar', items: (typeof valorantMaps !== 'undefined' ? valorantMaps : []) },
-    weapons: { title: 'Silahlar', items: (typeof valorantWeapons !== 'undefined' ? valorantWeapons : []) },
-    tactics: { title: 'Taktikler', items: (typeof valorantTactics !== 'undefined' ? valorantTactics : []) },
-    crosshair: {
-      title: 'Crosshair',
-      items: [
-        { title: 'Temel Crosshair', tags: ['Stabil', 'Kontrol'], text: 'Geniş ve dengeli nişan ayarı.', detail: 'Line-up ve spread için stabil nişan tercih et.' },
-        { title: 'Agresif Crosshair', tags: ['Giriş', 'Hızlı'], text: 'Hızlı giriş ve pozisyon okuma.', detail: 'Kısa menzilde daha net görüş ve hızlı işaretleme.' }
-      ]
-    },
-    modes: {
-      title: 'Oyun Modları',
-      items: [
-        { title: 'Competitive', tags: ['Ranked', 'Takım'], text: 'Rekabetçi oynanış ve takım koordinasyonu.', detail: 'Süreklilik ve iletişim kritik.' },
-        { title: 'Unrated', tags: ['Serbest', 'Pratik'], text: 'Kendi stilini deneme modu.', detail: 'Ajan ve rifler için pratik yap.' }
-      ]
-    },
-    updates: {
-      title: 'Güncellemeler',
-      items: [
-        { title: 'Meta Takip', tags: ['Güncel', 'Meta'], text: 'En güçlü ajan ve silah akışı.', detail: 'Oyuncu mantığına göre sabit ve esnek üçlü kombinasyon kur.' }
-      ]
-    }
-  },
-  rocket: {
-    home: {
-      title: 'Rocket League Rehberi',
-      text: 'Arabalar, mekanikler, taktikler ve antrenman bilgisi.',
-      items: [
-        { title: 'Arabalar', tags: ['Araç', 'Denge'], text: 'En iyi araç seçimi ve kullanım.', detail: 'Hitbox ve boost kontrolü için doğru araç seçimi.' },
-        { title: 'Mekanikler', tags: ['Kontrol', 'Boost'], text: 'Aerial ve ground kontrolü.', detail: 'Boost, flick ve karşılaşma kontrolü.' },
-        { title: 'Taktikler', tags: ['Takım', 'Pozisyon'], text: 'Takım oyununda doğru rotasyon.', detail: 'Top kontrolü, ikinci temas ve çember mantığı.' },
-        { title: 'Antrenman', tags: ['Pratik', 'Mekanik'], text: 'Günlük çalışma için kısa plan.', detail: 'Aerial, flick ve boost kontrolünü tekrar et.' }
-      ]
-    },
-    cars: { title: 'Arabalar', items: (typeof rocketCars !== 'undefined' ? rocketCars : []) },
-    arenas: {
-      title: 'Arenalar',
-      items: [
-        { title: 'Mekanik Arenalar', tags: ['Aerial', 'Boost'], text: 'Açık alan ve boost yönü.', detail: 'Açılardan kaçın ve boost kontrolünü önceden planla.' }
-      ]
-    },
-    mechanics: {
-      title: 'Mekanikler',
-      items: [
-        { title: 'Aerial', tags: ['Hava', 'Kontrol'], text: 'Aerial kontrolü ve timing.', detail: 'Aerialde topa en iyi temas için zamanlama önemlidir.' },
-        { title: 'Ground', tags: ['Zemin', 'Dribble'], text: 'Yüzeyde güvenli top kontrolü.', detail: 'Topu temiz ve kontrollü taşı.' }
-      ]
-    },
-    tactics: {
-      title: 'Taktikler',
-      items: [
-        { title: 'Takım Oynama', tags: ['Takım', 'Pozisyon'], text: 'Takım koordinasyonunu doğru kur.', detail: 'Kısa ve uzun pas arasındaki dengeyi koru.' },
-        { title: 'Rotasyon', tags: ['Rota', 'Boost'], text: 'Topa ulaşma ve çember kontrolü.', detail: 'Boost kullanımını erken ve doğru zamanda uygula.' }
-      ]
-    },
-    training: {
-      title: 'Antrenman',
-      items: [
-        { title: 'Günlük Pratik', tags: ['Mekanik', 'Tempo'], text: 'Her gün kısa ancak yoğun tekrar.', detail: 'Aerial ve boost için 15-20 dakikalık rutin oluştur.' }
-      ]
-    },
-    modes: {
-      title: 'Modlar',
-      items: [
-        { title: 'Ranked', tags: ['Rank', 'Kompozisyon'], text: 'Takım oyunu ve pozisyon akışı.', detail: 'Kısa takım iletişimi ve net rol dağılımı.' }
-      ]
-    },
-    aerial: {
-      title: 'Aerial',
-      items: [
-        { title: 'Aerial Temel', tags: ['Hava', 'Timing'], text: 'Topa doğru time planı.', detail: 'Yüksek temasta net ve kontrollü öne geç.' }
-      ]
-    }
-  }
-};
-
-function showLanding() {
-  document.getElementById('landing').classList.remove('hidden');
-  document.querySelectorAll('.game-app').forEach((app) => app.classList.add('hidden'));
-}
-
-function showGame(gameName) {
-  const landing = document.getElementById('landing');
-  const app = document.getElementById(`${gameName}-app`);
-  if (!app) return;
-
-  landing.classList.add('hidden');
-  document.querySelectorAll('.game-app').forEach((item) => item.classList.add('hidden'));
-  app.classList.remove('hidden');
-  renderSection(gameName, 'home');
-}
-
-function renderSection(gameName, sectionKey) {
-  const app = document.getElementById(`${gameName}-app`);
-  if (!app) return;
-
-  const main = app.querySelector('.game-main');
-  const section = sectionMap[gameName]?.[sectionKey] ?? sectionMap[gameName].home;
-  const items = section.items || [];
-
-  main.innerHTML = `
-    <div class="detail-page">
-      <section class="hero-page">
-        <div class="eyebrow">${gameName === 'valorant' ? 'VALORANT' : 'ROCKET LEAGUE'}</div>
-        <h1>${section.title}</h1>
-        <p>${section.text || 'İçerik ve detaylar burada yer alıyor.'}</p>
-        <div class="quick-links">
-          <button type="button" class="action-btn" data-section="home">Ana Sayfa</button>
-          <button type="button" class="action-btn ghost" data-section="${sectionKey === 'home' ? (gameName === 'valorant' ? 'agents' : 'cars') : 'home'}">${sectionKey === 'home' ? 'İçeriğe Git' : 'Geri Dön'}</button>
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ESPORTS GATE</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="landing" class="landing-page active">
+      <div class="landing-shell">
+        <div class="landing-header">
+          <span class="eyebrow">HANGİ OYUNA GİRECEKSİN?</span>
+          <h1>ESPORTS GATE</h1>
+          <p>VALORANT ve Rocket League için ayrı, profesyonel ve özel rehber arayüzleri.</p>
         </div>
-      </section>
 
-      <div class="section-title">
-        <h2>${section.title}</h2>
-        <span>${items.length} içerik</span>
-      </div>
+        <div class="game-grid">
+          <button type="button" class="game-card valorant-card" data-game="valorant">
+            <div class="game-badge">V</div>
+            <div class="game-icon">⚔️</div>
+            <h2>VALORANT</h2>
+            <p>Rekabetçi FPS rehberleri</p>
+            <ul>
+              <li>22+ Ajan</li>
+              <li>7 Harita</li>
+              <li>Profesyonel Taktikler</li>
+            </ul>
+            <span class="enter-btn">GİR</span>
+          </button>
 
-      <div class="content-grid">
-        ${items.map((item, index) => `
-          <article class="guide-card" data-game="${gameName}" data-section="${sectionKey}" data-index="${index}">
-            <div class="card-tags">
-              ${(item.tags || []).slice(0, 3).map(tag => `<span>${tag}</span>`).join('')}
-            </div>
-            <h3>${item.title}</h3>
-            <p>${item.text || ''}</p>
-            <button type="button" class="read-btn">Oku</button>
-          </article>
-        `).join('')}
+          <button type="button" class="game-card rocket-card" data-game="rocket">
+            <div class="game-badge">RL</div>
+            <div class="game-icon">🚗</div>
+            <h2>ROCKET LEAGUE</h2>
+            <p>Sportif, hızlı, mekanik rehber</p>
+            <ul>
+              <li>Arabalar</li>
+              <li>Aerial sistem</li>
+              <li>Rotasyon taktikleri</li>
+            </ul>
+            <span class="enter-btn">GİR</span>
+          </button>
+        </div>
       </div>
     </div>
-  `;
-}
 
-function renderDetail(gameName, sectionKey, itemIndex) {
-  const section = sectionMap[gameName]?.[sectionKey] ?? sectionMap[gameName].home;
-  const item = section.items[itemIndex];
-  const main = document.getElementById(`${gameName}-main`);
-  if (!main || !item) return;
+    <div id="valorant-app" class="game-app hidden valorant-app">
+      <header class="game-header valorant-header">
+        <div class="header-inner">
+          <div class="brand-block">
+            <span class="brand-mark">V</span>
+            <span>VALORANT</span>
+          </div>
 
-  main.innerHTML = `
-    <div class="single-detail">
-      <button type="button" class="back-content" data-section="${sectionKey}">← Geri</button>
-      <div class="eyebrow">${gameName === 'valorant' ? 'VALORANT' : 'ROCKET LEAGUE'}</div>
-      <h1>${item.title}</h1>
-      <div class="detail-tags">
-        ${(item.tags || []).map(tag => `<span>${tag}</span>`).join('')}
-      </div>
-      <p class="lead">${item.text || ''}</p>
-      <div class="detail-columns">
-        <div>
-          <h2>Detay</h2>
-          <p>${item.detail || 'Bu içerik için detay açıklaması eklenmiş durumda.'}</p>
+          <nav class="game-nav">
+            <a href="#" data-section="home">Ana Sayfa</a>
+            <a href="#" data-section="agents">Ajanlar</a>
+            <a href="#" data-section="maps">Haritalar</a>
+            <a href="#" data-section="weapons">Silahlar</a>
+            <a href="#" data-section="tactics">Taktikler</a>
+            <a href="#" data-section="crosshair">Crosshair</a>
+          </nav>
+
+          <button type="button" class="back-btn" data-back="landing">Geri</button>
         </div>
-        <aside class="tip-box">
-          <strong>İpucu</strong>
-          <p>Oyun tarzına göre uygun konum ve zamanlamayı uygula.</p>
+      </header>
+
+      <div class="game-layout">
+        <aside class="game-sidebar valorant-sidebar">
+          <div class="sidebar-box">
+            <h3>MENÜ</h3>
+            <ul>
+              <li><a href="#" data-section="home">🏠 Ana Sayfa</a></li>
+              <li><a href="#" data-section="agents">🧠 Ajanlar</a></li>
+              <li><a href="#" data-section="maps">🗺️ Haritalar</a></li>
+              <li><a href="#" data-section="weapons">🔫 Silahlar</a></li>
+              <li><a href="#" data-section="modes">🎮 Oyun Modları</a></li>
+              <li><a href="#" data-section="tactics">⚡ Taktikler</a></li>
+              <li><a href="#" data-section="crosshair">✦ Crosshair</a></li>
+              <li><a href="#" data-section="updates">📰 Güncellemeler</a></li>
+            </ul>
+          </div>
         </aside>
+
+        <main id="valorant-main" class="game-main"></main>
       </div>
     </div>
-  `;
-}
 
-function bindEvents() {
-  document.querySelectorAll('.game-card').forEach((card) => {
-    card.addEventListener('click', () => {
-      const gameName = card.dataset.game;
-      if (gameName === 'valorant' || gameName === 'rocket') {
-        showGame(gameName);
-      }
-    });
-  });
+    <div id="rocket-app" class="game-app hidden rocket-app">
+      <header class="game-header rocket-header">
+        <div class="header-inner">
+          <div class="brand-block">
+            <span class="brand-mark">RL</span>
+            <span>ROCKET LEAGUE</span>
+          </div>
 
-  document.querySelectorAll('.back-btn').forEach((button) => {
-    button.addEventListener('click', () => {
-      if (button.dataset.back === 'landing') {
-        showLanding();
-      }
-    });
-  });
+          <nav class="game-nav">
+            <a href="#" data-section="home">Ana Sayfa</a>
+            <a href="#" data-section="cars">Arabalar</a>
+            <a href="#" data-section="arenas">Arenalar</a>
+            <a href="#" data-section="mechanics">Mekanikler</a>
+            <a href="#" data-section="tactics">Taktikler</a>
+            <a href="#" data-section="training">Antrenman</a>
+          </nav>
 
-  document.body.addEventListener('click', (event) => {
-    const sectionTrigger = event.target.closest('[data-section]');
-    if (sectionTrigger) {
-      const sectionName = sectionTrigger.dataset.section;
-      const app = document.querySelector('.game-app:not(.hidden)');
-      if (!app) return;
-      const gameName = app.id.replace('-app', '');
-      const validSections = Object.keys(sectionMap[gameName] || {});
-      if (validSections.includes(sectionName)) {
-        event.preventDefault();
-        renderSection(gameName, sectionName);
-      }
-    }
+          <button type="button" class="back-btn" data-back="landing">Geri</button>
+        </div>
+      </header>
 
-    const detailCard = event.target.closest('.guide-card');
-    if (detailCard && event.target.closest('.read-btn')) {
-      const gameName = detailCard.dataset.game;
-      const sectionName = detailCard.dataset.section;
-      const index = Number(detailCard.dataset.index);
-      renderDetail(gameName, sectionName, index);
-    }
+      <div class="game-layout">
+        <aside class="game-sidebar rocket-sidebar">
+          <div class="sidebar-box">
+            <h3>MENÜ</h3>
+            <ul>
+              <li><a href="#" data-section="home">🏠 Ana Sayfa</a></li>
+              <li><a href="#" data-section="cars">🚗 Arabalar</a></li>
+              <li><a href="#" data-section="arenas">🏟️ Arenalar</a></li>
+              <li><a href="#" data-section="modes">🎮 Modlar</a></li>
+              <li><a href="#" data-section="mechanics">⚙️ Mekanikler</a></li>
+              <li><a href="#" data-section="aerial">✈️ Aerial</a></li>
+              <li><a href="#" data-section="tactics">⚡ Taktikler</a></li>
+              <li><a href="#" data-section="training">🏋️ Antrenman</a></li>
+            </ul>
+          </div>
+        </aside>
 
-    const backButton = event.target.closest('.back-content');
-    if (backButton) {
-      const app = document.querySelector('.game-app:not(.hidden)');
-      const gameName = app?.id.replace('-app', '');
-      const sectionName = backButton.dataset.section;
-      if (gameName && sectionName) renderSection(gameName, sectionName);
-    }
-  });
-}
+        <main id="rocket-main" class="game-main"></main>
+      </div>
+    </div>
 
-document.addEventListener('DOMContentLoaded', () => {
-  showLanding();
-  bindEvents();
-});
+    <script src="site-data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
